@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Message Link Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #25D366;
+        }
+
+        .input-field {
+            padding: 10px;
+            margin: 10px 0;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #25D366;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #1ebe5b;
+        }
+
+        .link-output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            
+          .footer{
+            background-color: black;
+          }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>WhatsApp Link Generator</h1>
+
+    <div>
+        <input type="text" id="phoneNumber" class="input-field" placeholder="Enter phone number (with country code and without space)" />
+    </div>
+    <div>
+        <input type="text" id="message" class="input-field" placeholder="Enter your message (optional)" />
+    </div>
+    <div>
+        <button class="button" onclick="generateWhatsAppLink()">Generate WhatsApp Link</button>
+    </div>
+
+    <div class="link-output" id="whatsappLink"></div>
+
+    <script>
+        function generateWhatsAppLink() {
+            // Get input values
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var message = document.getElementById('message').value;
+
+            // Trim whitespace from phone number and remove any '+' sign
+            phoneNumber = phoneNumber.trim().replace('+', '');
+
+            // Base WhatsApp URL
+            var whatsappBaseUrl = "https://wa.me/";
+
+            // Check if message is provided and encode it
+            var link;
+            if (message) {
+                var encodedMessage = encodeURIComponent(message);
+                link = whatsappBaseUrl + phoneNumber + "?text=" + encodedMessage;
+            } else {
+                link = whatsappBaseUrl + phoneNumber;
+            }
+
+            // Display the link and open WhatsApp in a new tab
+            var linkOutput = document.getElementById('whatsappLink');
+            linkOutput.innerHTML = `<a href="${link}" target="_blank">Click here to open WhatsApp with your message</a>`;
+
+            // Automatically open WhatsApp link in a new tab
+            window.open(link, '_blank');
+        }
+    </script>
+
+</body>
+<footer>
+ Made By Raghu with ♥️
+</footer>
+</html>
